@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
            id="org.apache.cordova.extractzipfile"
-      version="0.1">
+      version="1.0.0">
 
     <name>ExtractZipFile</name>
     <description>Extract a zip file into a specific folder </description>
