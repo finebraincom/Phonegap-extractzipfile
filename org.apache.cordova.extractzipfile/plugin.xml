@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+           id="org.apache.cordova.extractzipfile"
+      version="0.1">
+
+    <name>ExtractZipFile</name>
+    <description>Extract a zip file into a specific folder </description>
+    <license>GPL</license>
+    <keywords>cordova,zip</keywords>
+
+    <!-- ios -->
+    <platform name="ios">
+
+        <config-file target="config.xml" parent="/*">
+		<feature name="ExtractZipFile">
+			<param name="ios-package" value="CDVExtractZipFile"/>
+		</feature>
+        </config-file>
+
+        <js-module src="www/ZipPlugin.js" name="extractZipFile">
+            <clobbers target="extractZipFile" />
+        </js-module>
+
+	<header-file src="src/ios/ExtractZipFilePlugin.h" />
+	<source-file src="src/ios/ExtractZipFilePlugin.m" />
+
+    </platform>
+
+
+
+</plugin>
