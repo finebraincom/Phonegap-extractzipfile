@@ -6,7 +6,7 @@
 //
 
 #import <Cordova/CDVPlugin.h>
-#import "SSZipArchive/SSZipArchive.h"
+#import "SSZipArchive.h"
 
 @interface ExtractZipFilePlugin : CDVPlugin
 {
