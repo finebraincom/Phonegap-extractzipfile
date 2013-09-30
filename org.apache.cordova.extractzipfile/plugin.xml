@@ -12,12 +12,6 @@
     <!-- ios -->
     <platform name="ios">
 
-        <config-file target="config.xml" parent="/*">
-		<feature name="ExtractZipFile">
-			<param name="ios-package" value="CDVExtractZipFile"/>
-		</feature>
-        </config-file>
-
         <js-module src="www/ZipPlugin.js" name="extractZipFile">
             <clobbers target="extractZipFile" />
         </js-module>
