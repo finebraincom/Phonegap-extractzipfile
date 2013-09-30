@@ -16,8 +16,11 @@
             <clobbers target="extractZipFile" />
         </js-module>
 
-	<header-file src="src/ios/ExtractZipFilePlugin.h" />
-	<source-file src="src/ios/ExtractZipFilePlugin.m" />
+        <header-file src="src/ios/SSZipArchive.h" />
+    	<header-file src="src/ios/ExtractZipFilePlugin.h" />
+
+    	<source-file src="src/ios/ExtractZipFilePlugin.m" />
+    	<source-file src="src/ios/SSZipArchive.m" />
 
     </platform>
 
