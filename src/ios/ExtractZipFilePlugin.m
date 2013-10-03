@@ -2,6 +2,7 @@
 //  ExtractZipFilePlugin.m
 //
 //  Created by Shaun Rowe on 10/05/2012.
+//  Modifyed by Alessio Dal Bianco (infoFACTORY) on 3/10/2013
 //  Copyright (c) 2012 Pobl Creative Cyf. All rights reserved.
 //
 
@@ -10,22 +11,22 @@
 
 @implementation ExtractZipFilePlugin
 
-@synthesize callbackID;
 
-- (void)extract:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
+
+- (void)extract:(CDVInvokedUrlCommand*)command
 {    
-    callbackID = [arguments pop];
+    _callbackID = command.callbackId;
     
-    NSString *file = [arguments objectAtIndex:0];
-    NSString *destination = [arguments objectAtIndex:1];
+    NSString *file = [command argumentAtIndex:0];
+    NSString *destination = [command argumentAtIndex:1];
 
     CDVPluginResult *result;
     if([SSZipArchive unzipFileAtPath:file toDestination:destination delegate:nil]) {
         result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[destination stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        [self writeJavascript:[result toSuccessCallbackString:callbackID]];
+        [self writeJavascript:[result toSuccessCallbackString:_callbackID]];
     } else {
         result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[@"Could not extract archive" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        [self writeJavascript:[result toErrorCallbackString:callbackID]];        
+        [self writeJavascript:[result toErrorCallbackString:_callbackID]];
     }
 }
 
