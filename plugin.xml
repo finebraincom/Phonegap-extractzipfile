@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-           id="org.apache.cordova.extractzipfile"
-      version="1.0.0">
+    id="com.finebrain.extractzipfile"
+    version="0.0.1">
 
     <name>ExtractZipFile</name>
-    <description>Extract a zip file into a specific folder </description>
-    <license>GPL</license>
-    <keywords>cordova,zip</keywords>
+    <description>Finebrain ExtractZipFile Plugin</description>
+    <license>MIT</license>
+    <keywords>cordova,zip,extract</keywords>
+    <engines>
+        <engine name="cordova-ios" version=">=3.0.0"/>
+    </engines>
+    <js-module src="www/extract-zip-file.js" name="ExtractZipFile">
+        <clobbers target="ExtractZipFile" />
+    </js-module>
 
     <!-- ios -->
     <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+        	<feature name="ExtractZipFile">
+        		<param name="ios-package" value="ExtractZipFile"/>
+        	</feature>
+        </config-file>
 
-        <js-module src="www/ZipPlugin.js" name="extractZipFile">
-            <clobbers target="extractZipFile" />
-        </js-module>
-
+    	<header-file src="src/ios/ExtractZipFile.h" />
+	    <source-file src="src/ios/ExtractZipFile.m" />
+        <header-file src="src/ios/SSZipArchive/SSZipArchive.h" target-dir="SSZipArchive"/>
+        <source-file src="src/ios/SSZipArchive/SSZipArchive.m" target-dir="SSZipArchive" />
+        
+        <header-file src="src/ios/SSZipArchive/minizip/crypt.h" target-dir="SSZipArchive/minizip" />
+        <source-file src="src/ios/SSZipArchive/minizip/ioapi.c" target-dir="SSZipArchive/minizip" />
+        <header-file src="src/ios/SSZipArchive/minizip/ioapi.h" target-dir="SSZipArchive/minizip" />
+        <source-file src="src/ios/SSZipArchive/minizip/mztools.c" target-dir="SSZipArchive/minizip" />
+        <header-file src="src/ios/SSZipArchive/minizip/mztools.h" target-dir="SSZipArchive/minizip" />
+        <source-file src="src/ios/SSZipArchive/minizip/unzip.c" target-dir="SSZipArchive/minizip" />
+        <header-file src="src/ios/SSZipArchive/minizip/unzip.h" target-dir="SSZipArchive/minizip" />
+        <source-file src="src/ios/SSZipArchive/minizip/zip.c" target-dir="SSZipArchive/minizip" />
+        <header-file src="src/ios/SSZipArchive/minizip/zip.h" target-dir="SSZipArchive/minizip" />
 
         <framework src="libz.dylib" />
-
-        <header-file src="src/ios/SSZipArchive.h" />
-    	<header-file src="src/ios/ExtractZipFilePlugin.h" />
-
-    	<source-file src="src/ios/ExtractZipFilePlugin.m" />
-    	<source-file src="src/ios/SSZipArchive.m" />
-
-
-
     </platform>
-
-
-
 </plugin>

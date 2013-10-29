@@ -1,23 +1,31 @@
-# Experimental project, do not use for production! #
-
-## ExtractZipFile Phonegap 3.0 Plugin for iOS #
+# ExtractZipFile Phonegap 3.x Plugin for iOS #
+Porting of original plugin by Shaun Rowe (@shakie), Pobl Creative Cyf. (@poblcreative)
 
 This plugin allows you to extract a zip file
 
-Originally forked from the ExtractZipPlugin of Shaun Rowe (@shakie), Pobl Creative Cyf. (@poblcreative)
-Adapted fro Phonegap / Cordova 3.0 plugin specification
-
-
-
 ## Adding the Plugin to your project ##
 
-Since this plugin is Phonegap 3.0 ready, you will need only to type this line under your project folder:
+phonegap local plugin add https://github.com/finebraincom/Phonegap-extractzipfile
 
-    cordova plugin add https://github.com/infofactory/Phonegap-extractzipfile.git
+## Using the plugin ##
 
-or
+TBD:
 
-    phonegap plugin add https://github.com/infofactory/Phonegap-extractzipfile.git
+    <script type="text/javascript">
+        function extractFile(fileName, destination)
+        {
+            window.plugins.extractZipFile.extractFile(fileName,destination,win,fail);
+        }
 
+        function win(status) 
+        {
+            alert('Success'+status);
+        }
+  
+        function fail(error) 
+        { 
+            alert(error);
+        }
+    </script>
 
-
+    <input type="button" value="Extract Zip File" onClick="extractFile('/path/to/ZipFile.zip', '/path/to/extract/to');"/>
