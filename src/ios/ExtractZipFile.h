@@ -1,8 +1,10 @@
 //
-//  ExtractZipFilePlugin.h
+//  ExtractZipFile.h
 //
-//  Created by Shaun Rowe on 10/05/2012.
-//  Copyright (c) 2012 Pobl Creative Cyf. All rights reserved.
+//  Created by Iurii Kyian on 2013-10-30.
+//  Copyright (c) 2013 Medical Insights AG. All rights reserved.
+//
+//  (completely rewritten for Phonegap 3.1)
 //
 
 #import <Cordova/CDVPlugin.h>
@@ -10,11 +12,8 @@
 
 @interface ExtractZipFile : CDVPlugin
 {
-    NSString *callbackID;
 }
 
-@property (nonatomic, copy) NSString* callbackID;
-
-- (void)extract:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options;
+- (void)extract:(CDVInvokedUrlCommand*)command;
 
 @end

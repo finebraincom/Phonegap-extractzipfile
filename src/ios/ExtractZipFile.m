@@ -1,32 +1,44 @@
 //
-//  ExtractZipFilePlugin.m
+//  ExtractZipFile.m
 //
-//  Created by Shaun Rowe on 10/05/2012.
-//  Copyright (c) 2012 Pobl Creative Cyf. All rights reserved.
+//  Created by Iurii Kyian on 2013-10-30.
+//  Copyright (c) 2013 Medical Insights AG. All rights reserved.
 //
+
 
 #import "ExtractZipFile.h"
 #import "SSZipArchive.h"
 
 @implementation ExtractZipFile
 
-@synthesize callbackID;
+//@synthesize callbackID;
 
-- (void)extract:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
+//- (void)extract:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
+- (void)extract:(CDVInvokedUrlCommand*)command
 {    
-    callbackID = [arguments pop];
-    
-    NSString *file = [arguments objectAtIndex:0];
-    NSString *destination = [arguments objectAtIndex:1];
+    CDVPluginResult* pluginResult = nil;
+    NSString* file = [command.arguments objectAtIndex:0];
+    NSString* destination = [command.arguments objectAtIndex:1];
 
-    CDVPluginResult *result;
-    if([SSZipArchive unzipFileAtPath:file toDestination:destination delegate:nil]) {
-        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[destination stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        [self writeJavascript:[result toSuccessCallbackString:callbackID]];
-    } else {
-        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[@"Could not extract archive" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        [self writeJavascript:[result toErrorCallbackString:callbackID]];        
+    // parameters checking
+    if(file == nil){
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"source file arg was null"];
     }
+    if(destination == nil){
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"destination arg was null"];
+    }
+    if(pluginResult != nil){
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        return;
+    }
+
+    // processing request
+    if([SSZipArchive unzipFileAtPath:file toDestination:destination delegate:nil]) {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[destination stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[@"Could not extract archive" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 @end

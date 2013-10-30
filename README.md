@@ -9,12 +9,12 @@ phonegap local plugin add https://github.com/finebraincom/Phonegap-extractzipfil
 
 ## Using the plugin ##
 
-TBD:
-
     <script type="text/javascript">
+
+
         function extractFile(fileName, destination)
         {
-            window.plugins.extractZipFile.extractFile(fileName,destination,win,fail);
+            ExtractZipFile.extractFile(fileName,destination,win,fail);
         }
 
         function win(status) 
@@ -26,6 +26,7 @@ TBD:
         { 
             alert(error);
         }
+        
     </script>
 
     <input type="button" value="Extract Zip File" onClick="extractFile('/path/to/ZipFile.zip', '/path/to/extract/to');"/>
